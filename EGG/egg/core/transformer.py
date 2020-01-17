@@ -333,7 +333,6 @@ class TransformerDecoderLayer(nn.Module):
             query=x,
             key=encoder_out,
             value=encoder_out,
-            #static_kv=True,
         )
         x = F.dropout(x, p=self.dropout, training=self.training)
         x = residual + x
