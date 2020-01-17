@@ -94,9 +94,9 @@ def dump(game, n_features, device, gs_mode):
     print(len(messages))
     print(messages[0])
 
-    print("receiver_inputs")
-    print(len(receiver_inputs))
-    print(receiver_inputs[0])
+    #print("receiver_inputs")
+    #print(len(receiver_inputs))
+    #print(receiver_inputs[0])
 
     print("sender_inputs")
     print(len(receiver_outputs))
