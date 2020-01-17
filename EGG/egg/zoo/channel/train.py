@@ -86,17 +86,17 @@ def dump(game, n_features, device, gs_mode):
     sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
         core.dump_sender_receiver(game, dataset, gs=gs_mode, device=device, variable_length=True)
 
-        print("sender_inputs")
-        print(sender_inputs.shape)
+    print("sender_inputs")
+    print(sender_inputs.shape)
 
-        print("messages")
-        print(messages.shape)
+    print("messages")
+    print(messages.shape)
 
-        print("sender_inputs")
-        print(receiver_inputs.shape)
+    print("sender_inputs")
+    print(receiver_inputs.shape)
 
-        print("sender_inputs")
-        print(receiver_outputs.shape)
+    print("sender_inputs")
+    print(receiver_outputs.shape)
 
     unif_acc = 0.
     powerlaw_acc = 0.
