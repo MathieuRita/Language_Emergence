@@ -47,7 +47,7 @@ def _populate_cl_params(arg_parser: argparse.ArgumentParser) -> argparse.Argumen
     # optimizer
     arg_parser.add_argument('--optimizer', type=str, default='adam',
                         help='Optimizer to use [adam, sgd, adagrad] (default: adam)')
-    arg_parser.add_argument('--lr', type=float, default=1e-2,
+    arg_parser.add_argument('--lr', type=float, default=1e-3,
                         help='Learning rate (default: 1e-2)')
 
     # Channel parameters
@@ -289,4 +289,3 @@ def find_lengths(messages: torch.Tensor) -> torch.Tensor:
     lengths.add_(1).clamp_(max=max_k)
 
     return lengths
-
