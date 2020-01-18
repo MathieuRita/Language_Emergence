@@ -92,12 +92,12 @@ def dump(game, n_features, device, gs_mode):
     powerlaw_probs /= powerlaw_probs.sum()
 
     m0=messages[0].cpu().numpy()
-    m0=np.concatenate((m0,-np.ones((30))),axis=0)
+    m0=np.concatenate((m0,-np.ones((30-m0.shape[0]))),axis=0)
     M=np.expand_dims(m0,axis=0)
 
     for i in range(1,len(messages)):
         m=messages[i].cpu().numpy()
-        m=np.concatenate((m,-np.ones((30))),axis=0)
+        m=np.concatenate((m,-np.ones((30-m.shape[0]))),axis=0)
         m=np.expand_dims(m,axis=0)
         M=np.concatenate((M,m),axis=0)
 
