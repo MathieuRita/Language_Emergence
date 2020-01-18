@@ -98,6 +98,7 @@ def dump(game, n_features, device, gs_mode):
     for i in range(1,len(messages)):
         m=messages[i].cpu().numpy()
         m=np.concatenate((m,-np.ones((30))),axis=0)
+        m=np.expand_dims(m,axis=0)
         M=np.concatenate((M,m),axis=0)
 
 
