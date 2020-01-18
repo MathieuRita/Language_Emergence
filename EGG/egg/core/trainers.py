@@ -156,11 +156,15 @@ class Trainer:
         for callback in self.callbacks:
             callback.on_train_begin(self)
 
+        train_losses=[]
+
         for epoch in range(self.start_epoch, n_epochs):
             for callback in self.callbacks:
                 callback.on_epoch_begin()
 
             train_loss, train_rest = self.train_epoch()
+
+            train_losses.append(train_loss)
 
             for callback in self.callbacks:
                 callback.on_epoch_end(train_loss, train_rest)
@@ -174,6 +178,9 @@ class Trainer:
 
             if self.should_stop:
                 break
+
+        train_losses=np.array(train_losses)
+        np.save("train_losses",train_losses)
 
         for callback in self.callbacks:
             callback.on_train_end()
