@@ -91,10 +91,12 @@ def dump(game, n_features, device, gs_mode):
     powerlaw_probs = 1 / np.arange(1, n_features+1, dtype=np.float32)
     powerlaw_probs /= powerlaw_probs.sum()
 
-    for i in range(len(messages)):
-        messages[i]=messages[i].cpu().numpy()
+    #M=[]
 
-    np.save("messages",np.array(messages))
+    #for i in range(len(messages)):
+    #   messages[i]=messages[i].cpu().numpy()
+
+    #np.save("messages",np.array(messages))
 
     for sender_input, message, receiver_output in zip(sender_inputs, messages, receiver_outputs):
         input_symbol = sender_input.argmax()
