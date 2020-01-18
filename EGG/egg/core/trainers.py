@@ -164,7 +164,7 @@ class Trainer:
                 callback.on_epoch_begin()
 
             train_loss, train_rest = self.train_epoch()
-            print(train_rest)
+            print(train_rest["acc"])
 
             train_losses.append(train_loss)
 
