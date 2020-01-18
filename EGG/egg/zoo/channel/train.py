@@ -101,12 +101,6 @@ def dump(game, n_features, device, gs_mode):
         m=np.expand_dims(m,axis=0)
         M=np.concatenate((M,m),axis=0)
 
-    m=np.array([1.,2.,3.])
-    m=np.concatenate((m,-np.ones((30-m.shape[0]))),axis=0)
-    m=np.expand_dims(m,axis=0)
-    M=np.concatenate((M,m),axis=0)
-
-    print(M)
     np.save("messages",M)
 
     for sender_input, message, receiver_output in zip(sender_inputs, messages, receiver_outputs):
