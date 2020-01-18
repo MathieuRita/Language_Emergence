@@ -92,7 +92,7 @@ def dump(game, n_features, device, gs_mode):
     powerlaw_probs /= powerlaw_probs.sum()
 
     for i in range(len(messages)):
-        messages[i]=messages[i].numpy()
+        messages[i]=messages[i].cpu().numpy()
 
     np.save("messages",np.array(messages))
 
