@@ -158,14 +158,15 @@ class Trainer:
             callback.on_train_begin(self)
 
         train_losses=[]
+        accuracys=[]
 
         for epoch in range(self.start_epoch, n_epochs):
             for callback in self.callbacks:
                 callback.on_epoch_begin()
 
             train_loss, train_rest = self.train_epoch()
-            print(train_rest["acc"])
 
+            accuracys.append(train_rest["acc"])
             train_losses.append(train_loss)
 
             for callback in self.callbacks:
@@ -183,6 +184,7 @@ class Trainer:
 
         train_losses=np.array(train_losses)
         np.save("train_losses",train_losses)
+        np.save("accuracy",np.array(accuracys))
 
         for callback in self.callbacks:
             callback.on_train_end()
