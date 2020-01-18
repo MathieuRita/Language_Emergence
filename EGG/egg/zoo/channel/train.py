@@ -109,8 +109,6 @@ def dump(game, n_features, device, gs_mode):
     print(all_messages)
     np.save('messages.npy', all_messages)
 
-    np.save("messages",M)
-
     for sender_input, message, receiver_output in zip(sender_inputs, messages, receiver_outputs):
         input_symbol = sender_input.argmax()
         output_symbol = receiver_output.argmax()
