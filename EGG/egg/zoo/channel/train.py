@@ -188,7 +188,7 @@ def main(params):
                                       core.ConsoleLogger(as_json=True, print_train_loss=True)])
 
 
-    for i in range(opts.n_epochs/5):
+    for i in range(int(opts.n_epochs/5)):
         print(i)
         trainer.train(n_epochs=5)
         all_messages=dump(trainer.game, opts.n_features, device, False)
