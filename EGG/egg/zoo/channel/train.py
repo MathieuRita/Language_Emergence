@@ -137,6 +137,8 @@ def main(params):
         probs = np.ones(opts.n_features)
     elif opts.probs == 'powerlaw':
         probs = 1 / np.arange(1, opts.n_features+1, dtype=np.float32)
+    elif opts.probs == 'perso':
+        probs = opts.n_features+1 - np.arange(1, opts.n_features+1, dtype=np.float32)
     else:
         probs = np.array([float(x) for x in opts.probs.split(',')], dtype=np.float32)
     probs /= probs.sum()
