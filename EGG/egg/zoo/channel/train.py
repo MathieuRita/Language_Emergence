@@ -107,7 +107,7 @@ def dump(game, n_features, device, gs_mode):
         all_messages.append(x)
     all_messages = np.asarray(all_messages)
     print(all_messages)
-    np.save('messages.npy', all_messages)
+
 
     for sender_input, message, receiver_output in zip(sender_inputs, messages, receiver_outputs):
         input_symbol = sender_input.argmax()
@@ -116,13 +116,14 @@ def dump(game, n_features, device, gs_mode):
 
         unif_acc += acc
         powerlaw_acc += powerlaw_probs[input_symbol] * acc
-        print(f'input: {input_symbol.item()} -> message: {",".join([str(x.item()) for x in message])} -> output: {output_symbol.item()}', flush=True)
+        #print(f'input: {input_symbol.item()} -> message: {",".join([str(x.item()) for x in message])} -> output: {output_symbol.item()}', flush=True)
 
     unif_acc /= n_features
 
     print(f'Mean accuracy wrt uniform distribution is {unif_acc}')
     print(f'Mean accuracy wrt powerlaw distribution is {powerlaw_acc}')
     print(json.dumps({'powerlaw': powerlaw_acc, 'unif': unif_acc}))
+    return all_messages
 
 
 def main(params):
@@ -186,11 +187,17 @@ def main(params):
                            callbacks=[EarlyStopperAccuracy(opts.early_stopping_thr),
                                       core.ConsoleLogger(as_json=True, print_train_loss=True)])
 
-    trainer.train(n_epochs=opts.n_epochs)
+
+    for i in range(opts.n_epochs/5):
+        trainer.train(n_epochs=5)
+        all_messages=dump(trainer.game, opts.n_features, device, False)
+        np.save('messages_'+str(i*5)'.npy', all_messages)
+
+    #trainer.train(n_epochs=opts.n_epochs)
     if opts.checkpoint_dir:
         trainer.save_checkpoint(name=f'{opts.name}_vocab{opts.vocab_size}_rs{opts.random_seed}_lr{opts.lr}_shid{opts.sender_hidden}_rhid{opts.receiver_hidden}_sentr{opts.sender_entropy_coeff}_reg{opts.length_cost}_max_len{opts.max_len}')
 
-    dump(trainer.game, opts.n_features, device, False)
+    all_messages=dump(trainer.game, opts.n_features, device, False)
     core.close()
 
 

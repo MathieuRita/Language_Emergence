@@ -185,9 +185,9 @@ class Trainer:
                 break
 
         train_losses=np.array(train_losses)
-        np.save("train_losses",train_losses)
-        np.save("accuracy",np.array(accuracys))
-        np.save("mean_lengths",np.array(mean_lengths))
+        #np.save("train_losses",train_losses)
+        #np.save("accuracy",np.array(accuracys))
+        #np.save("mean_lengths",np.array(mean_lengths))
 
         for callback in self.callbacks:
             callback.on_train_end()
