@@ -65,8 +65,8 @@ def get_params(params):
                              "penalized by this cost (default: 0.0)")
     parser.add_argument('--name', type=str, default='model',
                         help="Name for your checkpoint (default: model)")
-    parser.add_argument('--early_stopping_thr', type=float, default=0.9999,
-                        help="Early stopping threshold on accuracy (default: 0.9999)")
+    parser.add_argument('--early_stopping_thr', type=float, default=0.98,
+                        help="Early stopping threshold on accuracy (default: 0.98)")
 
     args = core.init(parser, params)
 
@@ -188,11 +188,13 @@ def main(params):
                                       core.ConsoleLogger(as_json=True, print_train_loss=True)])
 
 
+    all_messages=dump(trainer.game, opts.n_features, device, False)
+    np.save('messages_0.npy', all_messages)
     for i in range(int(opts.n_epochs/5)):
         print(i)
         trainer.train(n_epochs=5)
         all_messages=dump(trainer.game, opts.n_features, device, False)
-        np.save('messages_'+str(i*5)+'.npy', all_messages)
+        np.save('messages_'+str((i+1)*5)+'.npy', all_messages)
 
     #trainer.train(n_epochs=opts.n_epochs)
     if opts.checkpoint_dir:
