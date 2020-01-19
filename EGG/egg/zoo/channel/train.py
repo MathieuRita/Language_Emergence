@@ -190,11 +190,11 @@ def main(params):
 
     all_messages=dump(trainer.game, opts.n_features, device, False)
     np.save('messages_0.npy', all_messages)
-    for i in range(int(opts.n_epochs/5)):
+    for i in range(int(opts.n_epochs)):
         print(i)
-        trainer.train(n_epochs=5)
+        trainer.train(n_epochs=1)
         all_messages=dump(trainer.game, opts.n_features, device, False)
-        np.save('messages_'+str((i+1)*5)+'.npy', all_messages)
+        np.save('messages_'+str((i+1))+'.npy', all_messages)
 
     #trainer.train(n_epochs=opts.n_epochs)
     if opts.checkpoint_dir:
