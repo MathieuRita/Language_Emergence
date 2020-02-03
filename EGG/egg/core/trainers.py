@@ -133,7 +133,7 @@ class Trainer:
 
         return mean_loss.item(), mean_rest
 
-    def train_epoch(self):
+    def train_epoch(self,epoch):
         mean_loss = 0
         mean_rest = {}
         n_batches = 0
@@ -163,7 +163,7 @@ class Trainer:
                 x = x.cpu().numpy()
                 all_messages.append(x)
             all_messages = np.asarray(all_messages)
-            np.save('messages'+str(n_batches)+'.npy',all_messages)
+            np.save('messages'+str(epoch)+'_'+str(n_batches)+'.npy',all_messages)
 
             ####
 
@@ -183,7 +183,7 @@ class Trainer:
             for callback in self.callbacks:
                 callback.on_epoch_begin()
 
-            train_loss, train_rest = self.train_epoch()
+            train_loss, train_rest = self.train_epoch(epoch)
 
             accuracys.append(train_rest["acc"])
             train_losses.append(train_loss)
