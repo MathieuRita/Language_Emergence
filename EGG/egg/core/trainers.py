@@ -164,7 +164,7 @@ class Trainer:
                 all_messages.append(x)
             all_messages = np.asarray(all_messages)
             np.save('messages'+str(epoch)+'_'+str(n_batches)+'.npy',all_messages)
-
+            
             ####
 
         mean_loss /= n_batches
