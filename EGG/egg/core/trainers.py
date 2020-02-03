@@ -11,6 +11,7 @@ import numpy as np
 
 import torch
 from torch.utils.data import DataLoader
+import egg.core as core
 
 from .util import get_opts, move_to
 from .callbacks import Callback, ConsoleLogger, Checkpoint, CheckpointSaver, TensorboardLogger
@@ -149,23 +150,21 @@ class Trainer:
             n_batches += 1
             mean_loss += optimized_loss
 
-        ### ADDITION TO CONTROLE THE MESSAGES
+            ### ADDITION TO CONTROLE THE MESSAGES
 
-        import egg.core as core
+            dataset_m = [[torch.eye(5).to(self.device), None]]
 
-        dataset_m = [[torch.eye(5).to(self.device), None]]
+            sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
+                core.dump_sender_receiver(self.game, dataset_m, gs=False, device=self.device, variable_length=True)
 
-        sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
-            core.dump_sender_receiver(self.game, dataset_m, gs=False, device=self.device, variable_length=True)
+            all_messages=[]
+            for x in messages:
+                x = x.cpu().numpy()
+                all_messages.append(x)
+            all_messages = np.asarray(all_messages)
+            np.save('messages'+str(n_batches)+'.npy',all_messages)
 
-        all_messages=[]
-        for x in messages:
-            x = x.cpu().numpy()
-            all_messages.append(x)
-        all_messages = np.asarray(all_messages)
-        print(all_messages)
-
-        ####
+            ####
 
         mean_loss /= n_batches
         mean_rest = _div_dict(mean_rest, n_batches)
