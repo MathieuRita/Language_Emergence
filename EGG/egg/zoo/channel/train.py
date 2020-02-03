@@ -201,8 +201,9 @@ def main(params):
         accs.append(acc)
     np.save('accuracy.npy',accs)
     #trainer.train(n_epochs=opts.n_epochs)
-    if opts.checkpoint_dir:
-        trainer.save_checkpoint(name=f'{opts.name}_vocab{opts.vocab_size}_rs{opts.random_seed}_lr{opts.lr}_shid{opts.sender_hidden}_rhid{opts.receiver_hidden}_sentr{opts.sender_entropy_coeff}_reg{opts.length_cost}_max_len{opts.max_len}')
+
+    #if opts.checkpoint_dir:
+    trainer.save_checkpoint(name=f'{opts.name}_vocab{opts.vocab_size}_rs{opts.random_seed}_lr{opts.lr}_shid{opts.sender_hidden}_rhid{opts.receiver_hidden}_sentr{opts.sender_entropy_coeff}_reg{opts.length_cost}_max_len{opts.max_len}')
 
     all_messages=dump(trainer.game, opts.n_features, device, False)
     core.close()
