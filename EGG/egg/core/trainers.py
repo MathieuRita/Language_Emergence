@@ -149,6 +149,22 @@ class Trainer:
             n_batches += 1
             mean_loss += optimized_loss
 
+        ### ADDITION TO CONTROLE THE MESSAGES
+
+        dataset = [[torch.eye(n_features).to(device), None]]
+
+        sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
+            core.dump_sender_receiver(game, dataset, gs=gs_mode, device=device, variable_length=True)
+
+        all_messages=[]
+        for x in messages:
+            x = x.cpu().numpy()
+            all_messages.append(x)
+        all_messages = np.asarray(all_messages)
+        print(all_messages)
+
+        ####
+
         mean_loss /= n_batches
         mean_rest = _div_dict(mean_rest, n_batches)
         return mean_loss.item(), mean_rest
