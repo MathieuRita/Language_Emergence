@@ -11,7 +11,6 @@ import numpy as np
 
 import torch
 from torch.utils.data import DataLoader
-import egg.core as core
 
 from .util import get_opts, move_to
 from .callbacks import Callback, ConsoleLogger, Checkpoint, CheckpointSaver, TensorboardLogger
@@ -151,6 +150,8 @@ class Trainer:
             mean_loss += optimized_loss
 
             ### ADDITION TO CONTROLE THE MESSAGES
+
+            import egg.core as core
 
             dataset_m = [[torch.eye(5).to(self.device), None]]
 
