@@ -151,6 +151,8 @@ class Trainer:
 
         ### ADDITION TO CONTROLE THE MESSAGES
 
+        import egg.core as core
+
         dataset = [[torch.eye(5).to(self.device), None]]
 
         sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
