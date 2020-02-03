@@ -151,7 +151,7 @@ class Trainer:
 
         ### ADDITION TO CONTROLE THE MESSAGES
 
-        dataset = [[torch.eye(5).to(device), None]]
+        dataset = [[torch.eye(5).to(self.device), None]]
 
         sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
             core.dump_sender_receiver(game, dataset, gs=gs_mode, device=self.device, variable_length=True)
