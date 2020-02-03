@@ -154,7 +154,7 @@ class Trainer:
         dataset = [[torch.eye(5).to(device), None]]
 
         sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
-            core.dump_sender_receiver(game, dataset, gs=gs_mode, device=device, variable_length=True)
+            core.dump_sender_receiver(game, dataset, gs=gs_mode, device=self.device, variable_length=True)
 
         all_messages=[]
         for x in messages:
