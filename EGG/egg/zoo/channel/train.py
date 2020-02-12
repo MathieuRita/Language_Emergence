@@ -120,7 +120,7 @@ def dump(game, n_features, device, gs_mode,pos_m=-2,pos_M=-2):
 
     unif_acc /= n_features
 
-    print(pos)
+    print(pos_m,pos_M)
     print(f'Mean accuracy wrt uniform distribution is {unif_acc}')
     print(f'Mean accuracy wrt powerlaw distribution is {powerlaw_acc}')
     print(json.dumps({'powerlaw': powerlaw_acc, 'unif': unif_acc}))
