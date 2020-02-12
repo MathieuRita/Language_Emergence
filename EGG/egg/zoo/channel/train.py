@@ -212,13 +212,13 @@ def main(params):
         all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
 
     for let in range(30):
-        all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
+        all_messages=dump(trainer.game, opts.n_features, device, False,let=let)
 
 
     all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
 
 
-    freq=[]
+    freq=np.zeros(30)
     for message in all_messages[0]:
         if i in range(message.shape[0]):
             freq[int(message[i])]+=1
