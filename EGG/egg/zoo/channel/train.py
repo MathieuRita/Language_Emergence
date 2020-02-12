@@ -79,7 +79,7 @@ def loss(sender_input, _message, _receiver_input, receiver_output, _labels):
     return loss, {'acc': acc}
 
 
-def dump(game, n_features, device, gs_mode,pos_m=-2,pos_m=-2):
+def dump(game, n_features, device, gs_mode,pos_m=-2,pos_M=-2):
     # tiny "dataset"
     dataset = [[torch.eye(n_features).to(device), None]]
 
