@@ -153,7 +153,7 @@ class Trainer:
 
             import egg.core as core
 
-            dataset_m = [[torch.eye(50).to(self.device), None]]
+            dataset_m = [[torch.eye(20).to(self.device), None]]
 
             sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
                 core.dump_sender_receiver(self.game, dataset_m, gs=False, device=self.device, variable_length=True)
