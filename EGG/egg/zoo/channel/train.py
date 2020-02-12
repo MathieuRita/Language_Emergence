@@ -106,7 +106,7 @@ def dump(game, n_features, device, gs_mode,pos):
         x = x.cpu().numpy()
         all_messages.append(x)
     all_messages = np.asarray(all_messages)
-    print(all_messages)
+    #print(all_messages)
 
 
     for sender_input, message, receiver_output in zip(sender_inputs, messages, receiver_outputs):
@@ -120,6 +120,7 @@ def dump(game, n_features, device, gs_mode,pos):
 
     unif_acc /= n_features
 
+    print(pos)
     print(f'Mean accuracy wrt uniform distribution is {unif_acc}')
     print(f'Mean accuracy wrt powerlaw distribution is {powerlaw_acc}')
     print(json.dumps({'powerlaw': powerlaw_acc, 'unif': unif_acc}))
