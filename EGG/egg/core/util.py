@@ -201,7 +201,8 @@ def dump_sender_receiver(game: torch.nn.Module,
             if pos>-1:
                 for i in range(3):
                     for j in range(message[i].shape[0]):
-                        message[i][j,pos]=np.random.randint(10)
+                        for k in range(pos):
+                            message[i][j,k]=np.random.randint(10)
 
             if let>-2:
                 for i in range(3):
