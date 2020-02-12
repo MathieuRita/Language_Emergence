@@ -79,12 +79,12 @@ def loss(sender_input, _message, _receiver_input, receiver_output, _labels):
     return loss, {'acc': acc}
 
 
-def dump(game, n_features, device, gs_mode,pos):
+def dump(game, n_features, device, gs_mode,pos,let=-2):
     # tiny "dataset"
     dataset = [[torch.eye(n_features).to(device), None]]
 
     sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
-        core.dump_sender_receiver(game, dataset, gs=gs_mode, device=device, variable_length=True,pos=pos)
+        core.dump_sender_receiver(game, dataset, gs=gs_mode, device=device, variable_length=True,pos=pos,let=let)
 
     unif_acc = 0.
     powerlaw_acc = 0.
@@ -210,6 +210,19 @@ def main(params):
         #trainer.save_checkpoint(name=f'{opts.name}_vocab{opts.vocab_size}_rs{opts.random_seed}_lr{opts.lr}_shid{opts.sender_hidden}_rhid{opts.receiver_hidden}_sentr{opts.sender_entropy_coeff}_reg{opts.length_cost}_max_len{opts.max_len}')
     for i in range(30):
         all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
+
+    for let in range(30):
+        all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
+
+
+    all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
+
+    freq=[]
+    for message in all_messages:
+        if i in range(len(message)):
+            freq[int(i)]+=1
+    print(freq)
+
     core.close()
 
 

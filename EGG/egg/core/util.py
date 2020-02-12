@@ -172,7 +172,7 @@ def _set_seed(seed) -> None:
 def dump_sender_receiver(game: torch.nn.Module,
                          dataset: 'torch.utils.data.DataLoader',
                          gs: bool, variable_length: bool,
-                         device: Optional[torch.device] = None,pos=-2):
+                         device: Optional[torch.device] = None,pos=-2,let=-2):
     """
     A tool to dump the interaction between Sender and Receiver
     :param game: A Game instance
@@ -202,6 +202,14 @@ def dump_sender_receiver(game: torch.nn.Module,
                 for i in range(3):
                     for j in range(message[i].shape[0]):
                         message[i][j,pos]=np.random.randint(10)
+
+            if let>-2:
+                for i in range(3):
+
+                    for j in range(messages[i].shape[0]):
+                        for k in range(messages[i].shape[1]):
+                            if message[i][j,k]==let:
+                                message[i][j,k]=np.random.randint(10)
 
             # Under GS, the only output is a message; under Reinforce, two additional tensors are returned.
             # We don't need them.

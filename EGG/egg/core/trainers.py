@@ -163,7 +163,7 @@ class Trainer:
                 x = x.cpu().numpy()
                 all_messages.append(x)
             all_messages = np.asarray(all_messages)
-            np.save('messages'+str(epoch)+'_'+str(n_batches)+'.npy',all_messages)
+            #np.save('messages'+str(epoch)+'_'+str(n_batches)+'.npy',all_messages)
 
             ####
 
