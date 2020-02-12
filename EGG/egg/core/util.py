@@ -198,11 +198,9 @@ def dump_sender_receiver(game: torch.nn.Module,
 
             message = game.sender(sender_input)
 
-            print(len(message))
-            print(message[0])
-            print(message[0].shape)
-
-            print(np.random.randint(10))
+            for i in range(3):
+                for j in range(message[i].shape[0]):
+                    message[i][j,pos]=np.random.randint(10)
 
             # Under GS, the only output is a message; under Reinforce, two additional tensors are returned.
             # We don't need them.
