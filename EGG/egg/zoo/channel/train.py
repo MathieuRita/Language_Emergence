@@ -79,12 +79,12 @@ def loss(sender_input, _message, _receiver_input, receiver_output, _labels):
     return loss, {'acc': acc}
 
 
-def dump(game, n_features, device, gs_mode):
+def dump(game, n_features, device, gs_mode,pos):
     # tiny "dataset"
     dataset = [[torch.eye(n_features).to(device), None]]
 
     sender_inputs, messages, receiver_inputs, receiver_outputs, _ = \
-        core.dump_sender_receiver(game, dataset, gs=gs_mode, device=device, variable_length=True)
+        core.dump_sender_receiver(game, dataset, gs=gs_mode, device=device, variable_length=True,pos=pos)
 
     unif_acc = 0.
     powerlaw_acc = 0.
