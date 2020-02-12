@@ -218,6 +218,8 @@ def main(params):
     all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
 
     print(all_messages)
+    print(all_messages[0])
+
     freq=[]
     for message in all_messages:
         if i in range(len(message)):
