@@ -217,10 +217,11 @@ def main(params):
 
     all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
 
+    print(all_messages)
     freq=[]
     for message in all_messages:
         if i in range(len(message)):
-            freq[int(i)]+=1
+            freq[int(message[i])]+=1
     print(freq)
 
     core.close()
