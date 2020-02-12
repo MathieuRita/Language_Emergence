@@ -198,7 +198,7 @@ def dump_sender_receiver(game: torch.nn.Module,
 
             message = game.sender(sender_input)
 
-            print(message.shape)
+            print(len(message))
 
             print(np.randint(10))
 
