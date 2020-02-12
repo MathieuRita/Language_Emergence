@@ -212,7 +212,7 @@ def main(params):
         all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
 
     for let in range(30):
-        all_messages=dump(trainer.game, opts.n_features, device, False,let=let)
+        all_messages=dump(trainer.game, opts.n_features, device, False,pos=-2,let=let)
 
 
     all_messages=dump(trainer.game, opts.n_features, device, False,pos=i)
