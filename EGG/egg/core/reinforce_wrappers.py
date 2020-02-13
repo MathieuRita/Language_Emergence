@@ -404,7 +404,7 @@ class SenderReceiverRnnReinforce(nn.Module):
             M=message[j]
             cost=0
             for i in range(1,M.shape[0]):
-                if M[i]==M[i-1]
+                if M[i]==M[i-1]:
                     cost+=1
             repetition_cost[j]=cost
         print(repetition_cost)
