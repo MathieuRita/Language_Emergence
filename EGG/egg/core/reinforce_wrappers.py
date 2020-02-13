@@ -231,7 +231,7 @@ class RnnSenderReinforce(nn.Module):
             logits.append(distr.log_prob(x))
 
             input = self.embedding(x)
-            print(x)
+            #print(x)
             sequence.append(x)
 
         sequence = torch.stack(sequence).permute(1, 0)
@@ -398,6 +398,8 @@ class SenderReceiverRnnReinforce(nn.Module):
         log_prob = effective_log_prob_s + log_prob_r
 
         length_loss = message_lengths.float() * self.length_cost
+
+        print(message)
 
         policy_length_loss = ((length_loss.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
         policy_loss = ((loss.detach() - self.mean_baseline['loss']) * log_prob).mean()
