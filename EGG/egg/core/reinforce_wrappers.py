@@ -408,7 +408,7 @@ class SenderReceiverRnnReinforce(nn.Module):
                     cost+=1
             repetition_cost[j]=cost
 
-        repetition_cost=torch.tensor(repetition_cost,device=device).float() * self.length_cost
+        repetition_cost=torch.tensor(repetition_cost,device=opts.device).float() * self.length_cost
 
         policy_rep_loss = ((repetition_cost.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
         policy_length_loss = ((length_loss.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
