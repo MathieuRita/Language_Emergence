@@ -208,21 +208,23 @@ def main(params):
 
     #if opts.checkpoint_dir:
         #trainer.save_checkpoint(name=f'{opts.name}_vocab{opts.vocab_size}_rs{opts.random_seed}_lr{opts.lr}_shid{opts.sender_hidden}_rhid{opts.receiver_hidden}_sentr{opts.sender_entropy_coeff}_reg{opts.length_cost}_max_len{opts.max_len}')
-    for i in range(30):
-        for k in range(30):
-            if i<k:
-                all_messages=dump(trainer.game, opts.n_features, device, False,pos_m=i,pos_M=k)
+    #for i in range(30):
+    #        for k in range(30):
+    #        if i<k:
+    #            all_messages=dump(trainer.game, opts.n_features, device, False,pos_m=i,pos_M=k)
 
 
 
     all_messages=dump(trainer.game, opts.n_features, device, False)
 
 
-    freq=np.zeros(30)
-    for message in all_messages[0]:
-        if i in range(message.shape[0]):
-            freq[int(message[i])]+=1
-    print(freq)
+    print(all_messages)
+
+    #freq=np.zeros(30)
+    #for message in all_messages[0]:
+    #        if i in range(message.shape[0]):
+    #        freq[int(message[i])]+=1
+    #print(freq)
 
     core.close()
 
