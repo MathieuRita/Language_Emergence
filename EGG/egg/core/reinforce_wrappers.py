@@ -399,7 +399,7 @@ class SenderReceiverRnnReinforce(nn.Module):
 
         length_loss = message_lengths.float() * self.length_cost
 
-        repetition_cost=np.zeros((512))
+        repetition_cost=np.zeros((message.shape[0]))
         for j in range(message.shape[0]):
             M=message[j]
             cost=0
