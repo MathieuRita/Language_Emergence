@@ -397,7 +397,7 @@ class SenderReceiverRnnReinforce(nn.Module):
 
         log_prob = effective_log_prob_s + log_prob_r
 
-        length_loss = message_lengths.float() * self.length_cost
+        #length_loss = message_lengths.float() * self.length_cost
 
         repetition_cost=np.zeros((512))
         for j in range(message.shape[0]):
@@ -407,9 +407,11 @@ class SenderReceiverRnnReinforce(nn.Module):
                 if M[i]==M[i-1]:
                     cost+=1
             repetition_cost[j]=cost
-        print(repetition_cost)
 
-        policy_length_loss = ((length_loss.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
+        repetition_cost=torch.tensor(repetition_cost).float() * self.length_cost
+
+        policy_rep_loss = ((repetition_cost.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
+        #policy_length_loss = ((length_loss.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
         policy_loss = ((loss.detach() - self.mean_baseline['loss']) * log_prob).mean()
 
         optimized_loss = policy_length_loss + policy_loss - weighted_entropy
