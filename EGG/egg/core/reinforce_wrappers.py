@@ -231,6 +231,7 @@ class RnnSenderReinforce(nn.Module):
             logits.append(distr.log_prob(x))
 
             input = self.embedding(x)
+            print(x)
             sequence.append(x)
 
         sequence = torch.stack(sequence).permute(1, 0)
@@ -588,5 +589,3 @@ class TransformerSenderReinforce(nn.Module):
             entropy = torch.cat([entropy, zeros], dim=1)
 
         return sequence, logits, entropy
-
-
