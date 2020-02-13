@@ -399,8 +399,15 @@ class SenderReceiverRnnReinforce(nn.Module):
 
         length_loss = message_lengths.float() * self.length_cost
 
-        print(message_lengths.float().shape)
-        print(message.shape)
+        repetition_cost=np.zeros((512))
+        for j in range(message.shape[0]):
+            M=message[j]
+            cost=0
+            for i in range(1,M.shape[0]):
+                if M[i]==M[i-1]
+                    cost+=1
+            repetition_cost[j]=cost
+        print(repetition_cost)
 
         policy_length_loss = ((length_loss.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
         policy_loss = ((loss.detach() - self.mean_baseline['loss']) * log_prob).mean()
