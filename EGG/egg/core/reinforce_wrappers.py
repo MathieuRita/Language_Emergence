@@ -414,7 +414,9 @@ class SenderReceiverRnnReinforce(nn.Module):
         #policy_length_loss = ((length_loss.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
         policy_loss = ((loss.detach() - self.mean_baseline['loss']) * log_prob).mean()
 
-        optimized_loss = policy_length_loss + policy_loss - weighted_entropy
+        #optimized_loss = policy_length_loss + policy_loss - weighted_entropy
+        optimized_loss = policy_rep_loss + policy_loss - weighted_entropy
+
         # if the receiver is deterministic/differentiable, we apply the actual loss
         optimized_loss += loss.mean()
 
