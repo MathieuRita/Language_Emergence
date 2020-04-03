@@ -198,12 +198,13 @@ def dump_sender_receiver(game: torch.nn.Module,
 
             message = game.sender(sender_input)
 
-            if pos_m>-1:
-                if pos_M>-1:
-                    for i in range(3):
-                        for j in range(message[i].shape[0]):
-                                for k in range(pos_m,pos_M):
-                                    message[i][j,k]=np.random.randint(30)
+            # ETUDE DES POSITIONS 
+            #if pos_m>-1:
+            #    if pos_M>-1:
+            #        for i in range(3):
+            #            for j in range(message[i].shape[0]):
+            #                    for k in range(pos_m,pos_M):
+            #                        message[i][j,k]=np.random.randint(30)
 
 
 

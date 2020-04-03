@@ -399,23 +399,24 @@ class SenderReceiverRnnReinforce(nn.Module):
 
         length_loss = message_lengths.float() * self.length_cost
 
-        repetition_cost=np.zeros((message.shape[0]))
-        for j in range(message.shape[0]):
-            M=message[j]
-            cost=0
-            for i in range(1,M.shape[0]):
-                if M[i]==M[i-1]:
-                    cost+=1
-            repetition_cost[j]=cost
+        # ADDITION
+        #repetition_cost=np.zeros((message.shape[0]))
+        #for j in range(message.shape[0]):
+        #    M=message[j]
+        #    cost=0
+        #    for i in range(1,M.shape[0]):
+        #        if M[i]==M[i-1]:
+        #            cost+=1
+        #    repetition_cost[j]=cost
 
-        repetition_cost=torch.tensor(repetition_cost,device=torch.device('cuda')).float() * self.length_cost
+        #repetition_cost=torch.tensor(repetition_cost,device=torch.device('cuda')).float() * self.length_cost
 
-        policy_rep_loss = ((repetition_cost.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
+        #policy_rep_loss = ((repetition_cost.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
         policy_length_loss = ((length_loss.float() - self.mean_baseline['length']) * effective_log_prob_s).mean()
         policy_loss = ((loss.detach() - self.mean_baseline['loss']) * log_prob).mean()
 
-        #optimized_loss = policy_length_loss + policy_loss - weighted_entropy
-        optimized_loss = policy_rep_loss + policy_loss - weighted_entropy
+        optimized_loss = policy_length_loss + policy_loss - weighted_entropy
+        #optimized_loss = policy_rep_loss + policy_loss - weighted_entropy
 
         # if the receiver is deterministic/differentiable, we apply the actual loss
         optimized_loss += loss.mean()

@@ -163,7 +163,7 @@ class Trainer:
                 x = x.cpu().numpy()
                 all_messages.append(x)
             all_messages = np.asarray(all_messages)
-            #np.save('messages'+str(epoch)+'_'+str(n_batches)+'.npy',all_messages)
+            np.save('messages'+str(epoch)+'_'+str(n_batches)+'.npy',all_messages)
 
             ####
 
@@ -203,8 +203,8 @@ class Trainer:
                 break
 
         train_losses=np.array(train_losses)
-        #np.save("train_losses",train_losses)
-        #np.save("accuracy",np.array(accuracys))
+        np.save("train_losses",train_losses)
+        np.save("accuracy",np.array(accuracys))
         #np.save("mean_lengths",np.array(mean_lengths))
 
         for callback in self.callbacks:
