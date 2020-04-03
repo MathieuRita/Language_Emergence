@@ -423,7 +423,7 @@ class SenderReceiverRnnReinforce(nn.Module):
 
         if self.training:
             self.update_baseline('loss', loss)
-            self.update_baseline('length', repetition_cost)
+            self.update_baseline('length', length_loss)
 
         for k, v in rest.items():
             rest[k] = v.mean().item() if hasattr(v, 'mean') else v
